@@ -1,0 +1,18 @@
+h1 {
+    text-align: center;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    /* position: relative; */
+    border: black solid 2px;
+    display: grid;
+    /* border: 2px solid #111;
+    border-radius: 5px; */
+}
+
+#find-me, #status {
+    /* text-align: center; */
+    margin: auto;
+}
