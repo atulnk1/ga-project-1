@@ -29,9 +29,6 @@ function geoFindMe() {
     }
 
     const container = document.querySelector(".container");
-
-
-    
   
   }
   
