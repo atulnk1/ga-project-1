@@ -1,0 +1,23 @@
+{
+  "name": "ga-project-1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atulnk1/ga-project-1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/atulnk1/ga-project-1/issues"
+  },
+  "homepage": "https://github.com/atulnk1/ga-project-1#readme",
+  "dependencies": {
+    "@supabase/supabase-js": "^1.18.1"
+  }
+}
