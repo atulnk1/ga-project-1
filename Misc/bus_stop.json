@@ -1,5 +1,4 @@
-{
-    "value": [
+[
         {
             "BusStopCode": "01012",
             "RoadName": "Victoria St",
@@ -35343,5 +35342,4 @@
             "Latitude": 1.3884141666958,
             "Longitude": 103.9897163888532
         }
-    ]
-}
+]
