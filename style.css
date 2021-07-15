@@ -3,7 +3,7 @@ h1 {
 }
 
 .container {
-    max-width: 800px;
+    max-width: 1000px;
     margin: auto;
     /* position: relative; */
     border: black solid 2px;
@@ -15,4 +15,14 @@ h1 {
 #find-me, #status {
     /* text-align: center; */
     margin: auto;
+}
+
+table {
+    border: black solid 1px;
+}
+
+th, td{
+    padding: 10px 20px;
+    border: 1px solid #000;
+    text-align: center;
 }
