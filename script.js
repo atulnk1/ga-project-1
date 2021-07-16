@@ -6,12 +6,9 @@ const supabaseUrl = 'https://lzrvibrmfmuawvsxigbq.supabase.co'
 const supabaseKey = SUPABASE_KEY
 const supabase = createClient(supabaseUrl, supabaseKey)
 
-const busesUrl = "http://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?"
-
-
 const main = async (lat, long) => {
   let { data, error } = await supabase
-  .rpc('nearest_stops_dynamic', {your_lat: lat, your_long: long} )
+  .rpc('nearest_stops_dynamic_lat_long', {your_lat: lat, your_long: long} )
 
   if(error) {
     console.error(error)
@@ -31,13 +28,15 @@ const main = async (lat, long) => {
     console.log(element.busstopcode)
     const response = await fetch(`http://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?BusStopCode=${element.busstopcode}`, requestOptions)
     const newData = await response.json()
-    let newObj = {busStopCode: null, busArray: []}
+    let newObj = {busStopCode: null, busArray: [], busList: "", mapLink: ""}
     newObj.busStopCode = newData.BusStopCode
     for(let i = 0; i < newData.Services.length; i++){
       newObj.busArray.push(newData.Services[i].ServiceNo)
       console.log(newData.Services[i].ServiceNo)
     }
+    newObj.mapLink = `https://developers.onemap.sg/commonapi/staticmap/getStaticImage?layerchosen=default&lat=${lat}&lng=${long}&zoom=17&height=512&width=400&lines=[[${lat},${long}],[${element.stoplat},${element.stoplong}]]:177,0,0:3&points=[${lat},${long},%22255,255,178%22,%22Y%22]|[${element.stoplat},${element.stoplong},%22175,50,0%22,%22B%22]`
     // newArr.push(newData.BusStopCode)
+    newObj.busList = newObj.busArray.join(', ')
     newArr.push(newObj)
     
     // console.log(response)
@@ -49,9 +48,55 @@ const main = async (lat, long) => {
 
   // getBus(data)
 
-  createTable(data)
+  createTable(data, newArr)
   
 }
+
+
+// const main = async (lat, long) => {
+//   let { data, error } = await supabase
+//   .rpc('nearest_stops_dynamic', {your_lat: lat, your_long: long} )
+
+//   if(error) {
+//     console.error(error)
+//   }
+
+//   console.log(data)
+  
+//   const newArr = []
+//   for(let element of data) {
+//     const myHeaders = new Headers();
+//     myHeaders.append("AccountKey", BUS_KEY);
+//     const requestOptions = {
+//       method: 'GET',
+//       headers: myHeaders,
+//       redirect: 'follow'
+//     };
+//     console.log(element.busstopcode)
+//     const response = await fetch(`http://datamall2.mytransport.sg/ltaodataservice/BusArrivalv2?BusStopCode=${element.busstopcode}`, requestOptions)
+//     const newData = await response.json()
+//     let newObj = {busStopCode: null, busArray: [], busList: ""}
+//     newObj.busStopCode = newData.BusStopCode
+//     for(let i = 0; i < newData.Services.length; i++){
+//       newObj.busArray.push(newData.Services[i].ServiceNo)
+//       console.log(newData.Services[i].ServiceNo)
+//     }
+//     // newArr.push(newData.BusStopCode)
+//     newObj.busList = newObj.busArray.join(', ')
+//     newArr.push(newObj)
+    
+//     // console.log(response)
+//   }
+
+//   console.log(newArr)
+
+//   // console.log(newArr)
+
+//   // getBus(data)
+
+//   createTable(data, newArr)
+  
+// }
 
 
 // const main = async (lat, long) => {
@@ -111,35 +156,91 @@ const main = async (lat, long) => {
 
 // }
 
-const createTable = (data) => {
+
+const createTable = (data, newArr) => {
   let table = document.querySelector('table')
   let thead = document.createElement('THEAD')
   let th1 = document.createElement('th')
   let th2 = document.createElement('th')
   let th3 = document.createElement('th')
+  let th4 = document.createElement('th')
   th1.innerHTML = 'Bus Stop Code'
   th2.innerHTML = 'Stop Name' 
+  th3.innerHTML = 'Bus Numbers'
+  th4.innerHTML = 'Map Links'
   thead.appendChild(th1)
   thead.appendChild(th2)
+  thead.appendChild(th3)
+  thead.appendChild(th4)
   table.appendChild(thead)
 
   let tbody = document.createElement('TBODY')
-  for(let element of data){
+  for(let i = 0; i < data.length; i++){
     let row = document.createElement('tr')
     row.className = "table-row"
     let rowDataOne = document.createElement('td')
-    rowDataOne.innerHTML = element.busstopcode
+    rowDataOne.innerHTML = data[i].busstopcode
     let rowDataTwo = document.createElement('td')
-    rowDataTwo.innerHTML = element.description
+    rowDataTwo.innerHTML = data[i].description
+    console.log(newArr[i].busList)
+    let rowDataThree = document.createElement('td')
+    rowDataThree.innerHTML = newArr[i].busList
+    let rowDataFour = document.createElement('td')
+    let a = document.createElement('a')
+    let text = document.createTextNode('Map Link')
+    a.appendChild(text)
+    a.title = 'Map Link'
+    a.href = newArr[i].mapLink
+    a.target = "_blank"
+    rowDataFour.appendChild(a)
+
+    
 
     row.appendChild(rowDataOne)
     row.appendChild(rowDataTwo)
+    row.appendChild(rowDataThree)
+    row.appendChild(rowDataFour)
+
     tbody.appendChild(row)
 
   }
 
   table.appendChild(tbody)
 }
+
+
+
+// const createTable = (data) => {
+//   let table = document.querySelector('table')
+//   let thead = document.createElement('THEAD')
+//   let th1 = document.createElement('th')
+//   let th2 = document.createElement('th')
+//   let th3 = document.createElement('th')
+//   th1.innerHTML = 'Bus Stop Code'
+//   th2.innerHTML = 'Stop Name' 
+//   th3.innerHTML = 'Bus Numbers'
+//   thead.appendChild(th1)
+//   thead.appendChild(th2)
+//   thead.appendChild(th3)
+//   table.appendChild(thead)
+
+//   let tbody = document.createElement('TBODY')
+//   for(let element of data){
+//     let row = document.createElement('tr')
+//     row.className = "table-row"
+//     let rowDataOne = document.createElement('td')
+//     rowDataOne.innerHTML = element.busstopcode
+//     let rowDataTwo = document.createElement('td')
+//     rowDataTwo.innerHTML = element.description
+
+//     row.appendChild(rowDataOne)
+//     row.appendChild(rowDataTwo)
+//     tbody.appendChild(row)
+
+//   }
+
+//   table.appendChild(tbody)
+// }
 // main()
 
 // const main = async () => {
