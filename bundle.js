@@ -4554,7 +4554,9 @@ const main = async (lat, long) => {
 }
 
 const createTable = (data, newArr) => {
-  let table = document.querySelector('table')
+  // let table = document.querySelector('table')
+  const container = document.querySelector('.container')
+  let table = document.createElement('table')
   let thead = document.createElement('THEAD')
   let th1 = document.createElement('th')
   let th2 = document.createElement('th')
@@ -4599,6 +4601,7 @@ const createTable = (data, newArr) => {
 
     tbody.appendChild(row)
 
+    container.append(table)
   }
 
   table.appendChild(tbody)
@@ -4612,9 +4615,9 @@ function goFineMeSimple() {
     const latitude  = position.coords.latitude;
     const longitude = position.coords.longitude;
 
-    status.textContent = `Latitude is: ${latitude}, Longitude is: ${longitude}`
+    status.textContent = `Your cooridnates are: Latitude: ${latitude}, Longitude: ${longitude}`
 
-    console.log(`Latitude is: ${latitude}, Longitude is: ${longitude}`);
+    console.log(`Your cooridnates are: Latitude is: ${latitude}, Longitude is: ${longitude}`);
     main(latitude, longitude)
   }
 
