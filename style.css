@@ -5,16 +5,10 @@ h1 {
 .container {
     max-width: 2000px;
     margin: auto;
-    /* position: relative; */
-    /* border: black solid 2px; */
     display: grid;
-    /* padding: 10px 10px 10px 10px; */
-    /* border: 2px solid #111;
-    border-radius: 5px; */
 }
 
 #find-me, #status {
-    /* text-align: center; */
     margin: auto;
 }
 
@@ -51,4 +45,8 @@ th, td{
 
 .tooltip:hover .tooltiptext {
   visibility: visible;
+}
+
+.no-border {
+  border: none;
 }

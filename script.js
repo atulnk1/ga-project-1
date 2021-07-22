@@ -74,10 +74,6 @@ const main = async (lat, long) => {
 
   console.log(newArr)
 
-  // console.log(newArr)
-
-  // getBus(data)
-
   createTable2(data, newArr)
   
 }
@@ -126,53 +122,41 @@ const createTable2 = (data, newArr) => {
     row.appendChild(rowDataTwo)
 
     let rowDataThree = document.createElement('td')
-    for(let j = 0; j < newArr[i].busFullArray.length; j++){
-      let row2 = document.createElement('tr')
-      let innerRowData1 = document.createElement('td')
-      innerRowData1.innerHTML = newArr[i].busFullArray[j].busNo
-      row2.appendChild(innerRowData1)
-      rowDataThree.appendChild(row2)
-    }
-    row.appendChild(rowDataThree)
-
     let rowDataFour = document.createElement('td')
-    for(let j = 0; j < newArr[i].busFullArray.length; j++){
-      let row2 = document.createElement('tr')
-      let innerRowData1 = document.createElement('td')
-      innerRowData1.innerHTML = newArr[i].busFullArray[j].diffTime1
-      row2.appendChild(innerRowData1)
-      rowDataFour.appendChild(row2)
-    }
-    row.appendChild(rowDataFour)
-
     let rowDataFive = document.createElement('td')
-    for(let j = 0; j < newArr[i].busFullArray.length; j++){
-      let row2 = document.createElement('tr')
-      let innerRowData1 = document.createElement('td')
-      innerRowData1.innerHTML = newArr[i].busFullArray[j].diffTime2
-      row2.appendChild(innerRowData1)
-      rowDataFive.appendChild(row2)
+
+    for(let j = 0; j < newArr[i].busFullArray.length; j++) {
+      let row3 = document.createElement('tr')
+      let row4 = document.createElement('tr')
+      let row5 = document.createElement('tr')
+
+      let innerRowData3 = document.createElement('td')
+      let innerRowData4 = document.createElement('td')
+      let innerRowData5 = document.createElement('td')
+
+      innerRowData3.innerHTML = newArr[i].busFullArray[j].busNo
+      innerRowData3.className = 'no-border'
+
+      innerRowData4.innerHTML = newArr[i].busFullArray[j].diffTime1
+      innerRowData4.className = 'no-border'
+
+      innerRowData5.innerHTML = newArr[i].busFullArray[j].diffTime2
+      innerRowData5.className = 'no-border'
+
+      row3.appendChild(innerRowData3)
+      row4.appendChild(innerRowData4)
+      row5.appendChild(innerRowData5)
+
+
+      rowDataThree.appendChild(row3)
+      rowDataFour.appendChild(row4)
+      rowDataFive.appendChild(row5)
+
     }
+
+    row.appendChild(rowDataThree)
+    row.appendChild(rowDataFour)
     row.appendChild(rowDataFive)
-    
-    // for(let j = 0; j < newArr[i].busFullArray.length; j++){
-    //   let row2 = document.createElement('tr')
-    //   let innerRowData1 = document.createElement('td')
-    //   innerRowData1.innerHTML = newArr[i].busFullArray[j].busNo
-    //   let innerRowData2 = document.createElement('td')
-    //   innerRowData2.innerHTML = newArr[i].busFullArray[j].diffTime1
-
-    //   let innerRowData3 = document.createElement('td')
-    //   innerRowData3.innerHTML = newArr[i].busFullArray[j].diffTime2
-
-    //   row2.appendChild(innerRowData1)
-    //   row2.appendChild(innerRowData2)
-    //   row2.appendChild(innerRowData3)
-
-    //   row.appendChild(row2)
-    // }
-    // let rowDataThree = document.createElement('td')
-    // rowDataThree.innerHTML = newArr[i].busList
     
 
     let rowDataSix = document.createElement('td')
@@ -183,14 +167,8 @@ const createTable2 = (data, newArr) => {
     a.href = newArr[i].mapLink
     a.target = "_blank"
     rowDataSix.appendChild(a)
-    // rowDataSix.rowSpan = 2
 
     row.appendChild(rowDataSix)
-    
-
-    
-    // row.appendChild(rowDataThree)
-    // row.appendChild(rowDataFour)
 
     tbody.appendChild(row)
 
@@ -199,7 +177,6 @@ const createTable2 = (data, newArr) => {
 
   table.appendChild(tbody)
 }
-
 
 // const createTable = (data, newArr) => {
 //   // let table = document.querySelector('table')
