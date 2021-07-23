@@ -4509,7 +4509,7 @@ const supabase = createClient(supabaseUrl, supabaseKey)
 
 const main = async (lat, long) => {
   let { data, error } = await supabase
-  .rpc('nearest_stops_dynamic_lat_long', {your_lat: lat, your_long: long} )
+  .rpc('nearest_stops_dynamic_lat_long_3', {your_lat: lat, your_long: long} )
 
   if(error) {
     console.error(error)
