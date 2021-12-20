@@ -2,3 +2,5 @@ config.js
 
 # Supabase
 .supabase
+node_modules
+
